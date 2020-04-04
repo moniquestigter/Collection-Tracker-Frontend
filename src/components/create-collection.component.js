@@ -55,8 +55,19 @@ export default class CreateCollection extends Component {
         }
 
         console.log(collection);
-
-        window.location="/"; //return to homepage
+        
+        const url = "http://localhost:3001/collections"
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name: collection.name, description: collection.description})
+        }).then(res => {
+            return res.text();
+        }).then(data => {
+            window.location="/"; //return to homepage
+        })
     }
 
     render(){
