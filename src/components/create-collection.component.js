@@ -73,13 +73,14 @@ export default class CreateCollection extends Component {
     render(){
         return (
             <div>
-                <h3> Create Collection</h3>
+                <h3 style={{marginTop: "3%"}}> Create Collection</h3>
                 <br/>
                 <form onSubmit={this.onSubmit}>
                     
                     <div className="form-group">
                         <label>Name: </label>
-                        <input type="text" 
+                        <input style={{width: "50%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.name}
@@ -88,7 +89,8 @@ export default class CreateCollection extends Component {
 
                     <div className="form-group">
                         <label>Description: </label>
-                        <input type="text" 
+                        <input style={{width: "80%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.description}
@@ -96,7 +98,7 @@ export default class CreateCollection extends Component {
                     </div>
 
                     <div className="form-group">
-                        <input type="submit" value="Create Collection" className="btn btn-primary" />
+                        <input type="submit" value="Create Collection" className="btn btn-success" />
                     </div>
 
                 </form>

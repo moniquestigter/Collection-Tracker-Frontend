@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import {AuthContext} from "./context/auth";
 
-import Navbar from "./components/navbar.components.js";
+import NavbarClass from "./components/navbar.components.js";
 import CreateCollection from "./components/create-collection.component.js";
 import ListCollections from "./components/list-collections.components.js";
 import ListItems from "./components/list-items.components.js";
@@ -26,8 +26,9 @@ function App() {
   return (
     <AuthContext.Provider value={true}>
       <Router>
-        <Navbar />
-        <br />
+        <NavbarClass />
+        <br/>
+        <div style={{paddingLeft: "6%"}}>
         <Route path="/" exact component={ListCollections} />
         <Route path="/:id/items" exact component={ListItems}/>
         <Route path="/:id/items/create" exact component={CreateItem}/>
@@ -35,6 +36,8 @@ function App() {
         <Route path="/signup" exact component= {SignUp} />
 
         <Route path="/create" exact component = {CreateCollection}/>
+        </div>
+        
         
       </Router>
     </AuthContext.Provider>

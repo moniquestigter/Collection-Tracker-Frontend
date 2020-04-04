@@ -1,15 +1,20 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom"
+import {Navbar,Button,Form,FormControl,Nav, Container} from "react-bootstrap"
 
-export default class Navbar extends Component {
+export default class NavbarClass extends Component {
 
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light" >
-                <Link to="/" className="navbar-brand">Track Your Collections!</Link>
-                <div className="collapse navbar-collapse">
-                </div>
-            </nav>
+            <div>
+                    <Navbar bg="dark" variant="dark">
+                        <Nav.Link href="/" >Track Your Collections!</Nav.Link>
+                        <Form inline >
+                            <FormControl type="text" placeholder="Search Collection" className="mr-sm-2"/>
+                            <Button variant="outline-info">Search</Button>
+                        </Form>
+                    </Navbar>
+            </div>
         );
     }
 }

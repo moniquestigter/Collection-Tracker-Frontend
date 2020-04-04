@@ -90,13 +90,14 @@ export default class CreateItem extends Component{
     render(){
         return (
             <div>
-                <h3> Add Item</h3>
+                <h3 style={{marginTop: "3%"}}> Add Item</h3>
                 <br/>
                 <form onSubmit={this.onSubmit}>
 
                     <div className="form-group">
                         <label>Name: </label>
-                        <input type="text" 
+                        <input style={{width: "50%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.name}
@@ -105,7 +106,8 @@ export default class CreateItem extends Component{
 
                     <div className="form-group">
                         <label>Description: </label>
-                        <input type="text" 
+                        <input style={{width: "70%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.description}
@@ -114,7 +116,8 @@ export default class CreateItem extends Component{
 
                     <div className="form-group">
                         <label>Value: </label>
-                        <input type="text" 
+                        <input style={{width: "20%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.value}
@@ -123,7 +126,8 @@ export default class CreateItem extends Component{
 
                     <div className="form-group">
                         <label>Condition: </label>
-                        <input type="text" 
+                        <input style={{width: "30%"}}
+                                type="text" 
                                 required
                                 className="form-control"
                                 value={this.state.condition}

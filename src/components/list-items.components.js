@@ -29,14 +29,15 @@ export default class ListItems extends Component{
     displayItems(){
         return this.state.items.map(e => {
             return (
-                    <div className="card" style={{ width: '19rem' }} key={e.id}>
-                        <div className="card-body card-body-border-dark" >
+                    <div className="card bg-light mb-3" style={{ width: '19rem' }} key={e.id}>
+                        <div className="card-body" >
                             <h5 className="card-title">{e.name}</h5>
-                            <p className="card-text">{e.description}</p>
-                            <p className="card-text">{e.value}</p>
-                            <p className="card-text">{e.condition}</p>
+                            <small className="card-text">{e.description}</small>
                             <br/>
-                            <p className="text-muted">Created {e.date}</p>
+                            <p className="card-text" style={{float: "right", color: "gray"}}>L.{e.value}</p>
+                            <br/>
+                            <p className="card-text">Condition: {e.condition}</p>
+                            <input type="submit" className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "right", marginBottom: "-10px;"}}/>
                         </div>
                     </div>
             );
@@ -46,13 +47,16 @@ export default class ListItems extends Component{
     render(){
         return (
             <div>
-                <h3>Items</h3>
-                <Link to={{
-                    pathname: "/"+ this.props.location.param + "/items/create", 
-                    param2: this.props.location.param,
-                    activeClassName: "btn btn-primary"
-                    }}>+ New Item</Link>
-                <div className="card-deck-bs-prefix card-deck-as col d-flex flex-column px-0">
+                <div style = {{display: "inline"}}>
+                    <h3>{this.props.location.paramName}</h3>
+                    <Link className="btn btn-secondary" style={{float: "right", marginTop: "-30px", marginRight: "50px"}} to={{
+                        pathname: "/"+ this.props.location.param + "/items/create", 
+                        param2: this.props.location.param,
+                        }}>+ New Item</Link>
+                </div>
+                <br/>
+                <br/>
+                <div className="card-columns" style={{display: "inline-block"}}>
                    {this.displayItems()}
                 </div>
             </div>
