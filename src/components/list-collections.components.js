@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import {Navbar,Button,Form,FormControl,Nav, Container} from "react-bootstrap"
 
 export default class ListCollections extends Component{
 
@@ -74,7 +73,9 @@ export default class ListCollections extends Component{
 
     render(){
         return (
-            <div>
+            
+            <div className="container">
+            
                 <div style= {{display: "inline"}}>
                     <h3 style={{margin: "20px 0 0 -5px"}}>My Collections</h3>
                     <Link to="/create" className="btn btn-secondary" style={{float: "right", marginTop: "-20px", marginRight: "50px"}}>+ New Collection</Link>

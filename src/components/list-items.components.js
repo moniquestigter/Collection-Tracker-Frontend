@@ -93,7 +93,8 @@ export default class ListItems extends Component{
         var pathArray = window.location.pathname.split('/');
         var col_id = pathArray[1];
         return (
-            <div>
+            
+            <div className="container">
                 <div style={{display: "inline", position: "relative"}}>
                     <a href="/" className="previous round"  style={{width: "3%"}}>&laquo; Back</a>
                     <h3 style={{textDecoration: "underline"}}>{this.state.collection_name}</h3>
