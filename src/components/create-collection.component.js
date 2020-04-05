@@ -72,10 +72,11 @@ export default class CreateCollection extends Component {
 
     render(){
         return (
-            <div>
+            <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
+                <a href="/" className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Create Collection</h3>
                 <br/>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit} >
                     
                     <div className="form-group">
                         <label>Name: </label>

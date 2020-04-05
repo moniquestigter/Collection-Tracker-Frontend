@@ -18,13 +18,14 @@ export default class CreateItem extends Component{
             description: "",
             value: 0,
             condition: "",
-            date: new Date()
+            date: new Date(),
+            collection_name: ""
         }
     }
 
     onChangeCollectionId(e){
         this.setState({
-            collection_id: e.target.value
+            collection_id: e
         });
     }
 
@@ -60,9 +61,11 @@ export default class CreateItem extends Component{
 
     onSubmit(e){
         e.preventDefault();
-        console.log(this.props.location.param2);
+        var pathArray = window.location.pathname.split('/');
+        var col_id = pathArray[1];
+        console.log(col_id);
         const item = {
-            collection_id: this.props.location.param2,
+            collection_id: col_id,
             name: this.state.name,
             description: this.state.description,
             value: this.state.value,
@@ -70,9 +73,8 @@ export default class CreateItem extends Component{
             date: this.state.date
         }
 
-        console.log(item);
         
-        const url = "http://localhost:3001/" + this.props.location.param2 + "/items";
+        const url = "http://localhost:3001/" + col_id + "/items";
         console.log("url: " + url);
         fetch(url, {
             method: "POST",
@@ -83,13 +85,20 @@ export default class CreateItem extends Component{
         }).then(res => {
             return res.text();
         }).then(data => {
-            //window.location="/" + this.props.location.param2 + "/items"; //return to items "homepage" FFIXXX!!!!
+           // console.log(this.props.location.param2);
+            var pathArray = window.location.pathname.split('/');
+            var col_id = pathArray[1];
+           console.log(col_id);
+            window.location="/" + col_id + "/items"; //return to items "homepage"
         }) 
     }
 
     render(){
+        var pathArray = window.location.pathname.split('/');
+        var col_id = pathArray[1];
         return (
-            <div>
+            <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
+                <a href={`/${col_id}/items`} className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Add Item</h3>
                 <br/>
                 <form onSubmit={this.onSubmit}>
@@ -133,7 +142,8 @@ export default class CreateItem extends Component{
                                 value={this.state.condition}
                                 onChange={this.onChangeCondition} />
                     </div>
-
+                
+                    <br/>
                     <div className="form-group">
                         <input type="submit" value="Add Item" className="btn btn-primary" />
                     </div>

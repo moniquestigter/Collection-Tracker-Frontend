@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import {FontAwesome} from "react-icons";
-
+import {Navbar,Button,Form,FormControl,Nav, Container} from "react-bootstrap"
 
 export default class ListCollections extends Component{
 
     constructor(props){
         super(props); 
+
+        this.deleteCollection = this.deleteCollection.bind(this);
 
         this.state = {
             collections: []
@@ -27,7 +28,28 @@ export default class ListCollections extends Component{
         })
     }
 
+    deleteCollection(id){
+        const url = "http://localhost:3001/collections/" + id;
+
+        fetch(url, {
+            method: 'DELETE',
+        }).then(res => res.text())
+        .then(res=> console.log(res));
+
+        this.setState({
+            collections: this.state.collections.filter(col => col.id !== id)
+        })
+
+    }
+
     displayCollections() { 
+        if(this.state.collections.length === 0){
+            return (
+                <>
+                <h5>No collections added yet!</h5>
+                </>
+            );
+        }
         return this.state.collections.map(e => {
             //console.log(e.id);
             return (
@@ -37,11 +59,11 @@ export default class ListCollections extends Component{
                             <small className="card-text">{e.description}</small>
                             <br/>
                             <br/>
-                            <input type="submit" className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "left"}}/>
+                            <input type="submit" onClick={() => {this.deleteCollection(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "left"}}/>
                             <Link className="btn btn-info btn-sm" style={{float: "right"}} to={{
                                 pathname: `/${e.id}/items`, 
                                 param: `${e.id}`,
-                                paramName: `${e.name}`
+                                colName: `${e.name}`
                                 }}>Show Items</Link>
                             <br/>
                         </div>
