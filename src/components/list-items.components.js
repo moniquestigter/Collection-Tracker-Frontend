@@ -20,9 +20,11 @@ export default class ListItems extends Component{
     componentDidMount(){
        
         var pathArray = window.location.pathname.split('/');
-        var col_id = pathArray[1];
+        var col_id = pathArray[2];
+        var user_id = pathArray[4];
+        console.log("col_id: ", col_id, "user_id: ", user_id);
 
-        const url = "http://localhost:3001/" + col_id + "/items";
+        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items";
         fetch(url)
         .then(res => {
             return res.json();
@@ -30,7 +32,7 @@ export default class ListItems extends Component{
             return JSON.stringify(dataJSON);
         }).then(strJSON => {
             this.setState({items: JSON.parse(strJSON)});
-            const url2 = "http://localhost:3001/collections/" + col_id; //for the name
+            const url2 = "http://localhost:3001/" + user_id + "/collections/" + col_id; //for the name
             fetch(url2)
             .then(res => {
                 return res.json();
@@ -49,9 +51,10 @@ export default class ListItems extends Component{
 
     deleteItem(id){
         var pathArray = window.location.pathname.split('/');
-        var col_id = pathArray[1];
+        var col_id = pathArray[2];
+        var user_id = pathArray[1];
 
-        const url = "http://localhost:3001/" + col_id + "/items/" + id;
+        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items/" + id;
         console.log("url: "+ url);
         fetch(url, {
             method: 'DELETE',
@@ -91,15 +94,16 @@ export default class ListItems extends Component{
 
     render(){
         var pathArray = window.location.pathname.split('/');
-        var col_id = pathArray[1];
+        var col_id = pathArray[2];
+        var user_id = pathArray[1];
         return (
             
             <div className="container">
                 <div style={{display: "inline", position: "relative"}}>
-                    <a href="/" className="previous round"  style={{width: "3%"}}>&laquo; Back</a>
+                    <a href={"/" + user_id} className="previous round"  style={{width: "3%"}}>&laquo; Back</a>
                     <h3 style={{textDecoration: "underline"}}>{this.state.collection_name}</h3>
                     <Link className="btn btn-secondary" style={{float: "right", marginTop: "-30px", marginRight: "50px"}} to={{
-                        pathname: "/"+ col_id + "/items/create"
+                        pathname: "/" + user_id + "/"+ col_id + "/items/create"
                         }}>+ New Item</Link>
                 </div>
                 <br/>

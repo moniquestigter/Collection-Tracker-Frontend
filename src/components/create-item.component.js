@@ -62,7 +62,8 @@ export default class CreateItem extends Component{
     onSubmit(e){
         e.preventDefault();
         var pathArray = window.location.pathname.split('/');
-        var col_id = pathArray[1];
+        var col_id = pathArray[2];
+        var user_id = pathArray[1];
         console.log(col_id);
         const item = {
             collection_id: col_id,
@@ -74,7 +75,7 @@ export default class CreateItem extends Component{
         }
 
         
-        const url = "http://localhost:3001/" + col_id + "/items";
+        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items";
         console.log("url: " + url);
         fetch(url, {
             method: "POST",
@@ -87,18 +88,20 @@ export default class CreateItem extends Component{
         }).then(data => {
            // console.log(this.props.location.param2);
             var pathArray = window.location.pathname.split('/');
-            var col_id = pathArray[1];
+            var user_id = pathArray[1];
+            var col_id = pathArray[2];
            console.log(col_id);
-            window.location="/" + col_id + "/items"; //return to items "homepage"
+            window.location="/" + user_id + "/" + col_id + "/items"; //return to items "homepage"
         }) 
     }
 
     render(){
         var pathArray = window.location.pathname.split('/');
-        var col_id = pathArray[1];
+        var col_id = pathArray[2];
+        var user_id = pathArray[1];
         return (
             <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
-                <a href={`/${col_id}/items`} className="previous round" >&laquo; Back</a>
+                <a href={`/${user_id}/${col_id}/items`} className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Add Item</h3>
                 <br/>
                 <form onSubmit={this.onSubmit}>

@@ -16,7 +16,8 @@ export default class CreateCollection extends Component {
             name: "",
             description: "",
             itemCount: 0,
-            date: new Date()
+            date: new Date(),
+            user_id: 0
         }
     }
 
@@ -46,34 +47,41 @@ export default class CreateCollection extends Component {
 
     onSubmit(e){
         e.preventDefault();
+        var pathArray = window.location.pathname.split('/');
+        var u_id = pathArray[1];
 
         const collection = {
             name: this.state.name,
             description: this.state.description,
             itemCount: this.state.itemCount,
-            date: this.state.date
+            date: this.state.date,
+            user_id: u_id
         }
 
         console.log(collection);
-        
-        const url = "http://localhost:3001/collections"
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
+        console.log("useri id: ", user_id);
+        const url = "http://localhost:3001/" + user_id + "/collections";
         fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({name: collection.name, description: collection.description})
+            body: JSON.stringify({name: collection.name, description: collection.description, user_id: collection.user_id})
         }).then(res => {
             return res.text();
         }).then(data => {
-            window.location="/"; //return to homepage
+            window.location="/"+ user_id; //return to homepage
         })
     }
 
     render(){
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
         return (
             <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
-                <a href="/" className="previous round" >&laquo; Back</a>
+                <a href={"/" + user_id} className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Create Collection</h3>
                 <br/>
                 <form onSubmit={this.onSubmit} >

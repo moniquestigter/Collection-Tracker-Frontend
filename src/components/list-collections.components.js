@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import {withAuth} from "@okta/okta-react";
 
 export default class ListCollections extends Component{
 
@@ -13,8 +14,14 @@ export default class ListCollections extends Component{
         };
     }
     
+    logout = async () => {
+        this.props.auth.logout("/login");
+    };
+    
     componentDidMount(){
-        const url = "http://localhost:3001/collections"
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
+        const url = "http://localhost:3001/" + user_id + "/collections"
         fetch(url)
         .then(res => {
             return res.json();
@@ -28,7 +35,9 @@ export default class ListCollections extends Component{
     }
 
     deleteCollection(id){
-        const url = "http://localhost:3001/collections/" + id;
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
+        const url = "http://localhost:3001/" + user_id + "/collections/" + id;
 
         fetch(url, {
             method: 'DELETE',
@@ -42,6 +51,8 @@ export default class ListCollections extends Component{
     }
 
     displayCollections() { 
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
         if(this.state.collections.length === 0){
             return (
                 <>
@@ -60,7 +71,7 @@ export default class ListCollections extends Component{
                             <br/>
                             <input type="submit" onClick={() => {this.deleteCollection(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "left"}}/>
                             <Link className="btn btn-info btn-sm" style={{float: "right"}} to={{
-                                pathname: `/${e.id}/items`, 
+                                pathname: `/${user_id}/${e.id}/items`, 
                                 param: `${e.id}`,
                                 colName: `${e.name}`
                                 }}>Show Items</Link>
@@ -72,13 +83,16 @@ export default class ListCollections extends Component{
     }
 
     render(){
+        var pathArray = window.location.pathname.split('/');
+        var user_id = pathArray[1];
         return (
             
             <div className="container">
-            
                 <div style= {{display: "inline"}}>
                     <h3 style={{margin: "20px 0 0 -5px"}}>My Collections</h3>
-                    <Link to="/create" className="btn btn-secondary" style={{float: "right", marginTop: "-20px", marginRight: "50px"}}>+ New Collection</Link>
+                    <Link className="btn btn-secondary" style={{float: "right", marginTop: "-20px", marginRight: "50px"}} to={{
+                        pathname: "/"+ user_id + "/create"
+                        }}>+ New Collection</Link>
                 </div>
                 <br/>
                 <br/>
