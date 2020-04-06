@@ -10,7 +10,7 @@ export default function NavbarClass (props) {
                         <br/>
                         <a className="navbar-brand" style={{color: "white", padding: "1%"}} >Track Your Collections</a>
                         <form className="form-inline ml-auto" >
-                            <a href="http://localhost:3000/login" style={{ color: "black", background: "white", width: "120%", fontSize: "15px"}}> Logout</a>
+                            <a href="http://localhost:3000/login" style={{ color: "white", fontSize: "15px"}}> Logout</a>
                         </form>
                     </nav>
                     <section id="showcase" style={{minHeight: "200px", background: `url(${Image})`, textAlign: "center"}}>

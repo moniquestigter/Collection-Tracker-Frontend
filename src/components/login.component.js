@@ -74,6 +74,7 @@ export default class Login extends Component {
                 <h3 style={{marginTop: "3%"}}> Login </h3>
                 <br/>
                 <form onSubmit={this.onSubmit} >
+
                     <div className="form-group">
                         <label>Username: </label>
                         <input style={{width: "70%"}}
@@ -100,7 +101,10 @@ export default class Login extends Component {
 
                 </form>
             </div>
-            
+            <div style={{float: "right", marginTop: "-25%", marginRight: "8%", textAlign: "center"}}>
+                <h3>Don't have an account?</h3>
+                <a href="/signup">Click Here!</a>
+            </div>
             
             </div>
             
