@@ -46,7 +46,7 @@ export default class Login extends Component {
         }
 
 
-        const url = "http://localhost:3001/users";
+        const url = "https://collection-tracker-api.herokuapp.com/users";
         fetch(url)
         .then(res => {
             return res.json();
@@ -60,6 +60,8 @@ export default class Login extends Component {
                     this.setState({current_user_id: el.id, current_user_name: el.username, logged_in: true});
                     history.push("/"+ el.id);
                     //window.location="/" + el.id;
+                } else {
+                    this.setState({logged_in: false});
                 }
             });
         })

@@ -62,7 +62,7 @@ export default class CreateCollection extends Component {
         var pathArray = window.location.pathname.split('/');
         var user_id = pathArray[1];
         console.log("useri id: ", user_id);
-        const url = "http://localhost:3001/" + user_id + "/collections";
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections";
         fetch(url, {
             method: "POST",
             headers: {

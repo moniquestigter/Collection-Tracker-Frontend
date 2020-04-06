@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import NavbarClass from "./navbar.components.js";
+import {confirmAlert} from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export default class ListItems extends Component{
     constructor(props){
@@ -25,7 +27,7 @@ export default class ListItems extends Component{
         var user_id = pathArray[4];
         console.log("col_id: ", col_id, "user_id: ", user_id);
 
-        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items";
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections/" + col_id + "/items";
         fetch(url)
         .then(res => {
             return res.json();
@@ -33,7 +35,7 @@ export default class ListItems extends Component{
             return JSON.stringify(dataJSON);
         }).then(strJSON => {
             this.setState({items: JSON.parse(strJSON)});
-            const url2 = "http://localhost:3001/" + user_id + "/collections/" + col_id; //for the name
+            const url2 = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections/" + col_id; //for the name
             fetch(url2)
             .then(res => {
                 return res.json();
@@ -55,7 +57,7 @@ export default class ListItems extends Component{
         var col_id = pathArray[2];
         var user_id = pathArray[1];
 
-        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items/" + id;
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections/" + col_id + "/items/" + id;
         console.log("url: "+ url);
         fetch(url, {
             method: 'DELETE',
@@ -65,6 +67,20 @@ export default class ListItems extends Component{
         this.setState({
             items: this.state.items.filter(it => it.id !== id)
         })
+    }
+
+    alertDelete(e){
+        confirmAlert({
+            title: "Delete Item",
+            message: "Are you sure you want to delete it?",
+            buttons: [
+                { 
+                    label: "Yes",
+                    onClick: () => this.deleteItem(e)
+                },
+                { label: "Cancel" }
+            ]
+        });
     }
 
     displayItems(){
@@ -85,7 +101,7 @@ export default class ListItems extends Component{
                             <p className="card-text" style={{float: "right", color: "gray"}}>L.{e.value}</p>
                             <br/>
                             <p className="card-text">Condition: {e.condition}</p>
-                            <input type="submit" onClick={() => { this.deleteItem(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "right", marginBottom: "4%"}}/>
+                            <input type="submit" onClick={() => { this.alertDelete(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "right", marginBottom: "4%"}}/>
                         </div>
                     </div>
             );

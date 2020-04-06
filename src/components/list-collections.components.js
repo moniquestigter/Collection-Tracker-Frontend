@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {withAuth} from "@okta/okta-react";
 import NavbarClass from "./navbar.components.js";
+import {confirmAlert} from "react-confirm-alert";
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export default class ListCollections extends Component{
 
@@ -22,7 +24,7 @@ export default class ListCollections extends Component{
     componentDidMount(){
         var pathArray = window.location.pathname.split('/');
         var user_id = pathArray[1];
-        const url = "http://localhost:3001/" + user_id + "/collections"
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections"
         fetch(url)
         .then(res => {
             return res.json();
@@ -38,7 +40,7 @@ export default class ListCollections extends Component{
     deleteCollection(id){
         var pathArray = window.location.pathname.split('/');
         var user_id = pathArray[1];
-        const url = "http://localhost:3001/" + user_id + "/collections/" + id;
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections/" + id;
 
         fetch(url, {
             method: 'DELETE',
@@ -49,6 +51,20 @@ export default class ListCollections extends Component{
             collections: this.state.collections.filter(col => col.id !== id)
         })
 
+    }
+
+    alertDelete(e){
+        confirmAlert({
+            title: "Delete Collection",
+            message: "Are you sure you want to delete it?",
+            buttons: [
+                { 
+                    label: "Yes",
+                    onClick: () => this.deleteCollection(e)
+                },
+                { label: "Cancel" }
+            ]
+        });
     }
 
     displayCollections() { 
@@ -71,7 +87,7 @@ export default class ListCollections extends Component{
                             <small className="card-text">{e.description}</small>
                             <br/>
                             <br/>
-                            <input type="submit" onClick={() => {this.deleteCollection(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "left"}}/>
+                            <input type="submit" onClick={() => {this.alertDelete(e.id)}} className="btn btn-outline-danger btn-sm" value="Delete" style={{float: "left"}}/>
                             <Link className="btn btn-info btn-sm" style={{float: "right"}} to={{
                                 pathname: `/${user_id}/${e.id}/items`, 
                                 param: `${e.id}`,

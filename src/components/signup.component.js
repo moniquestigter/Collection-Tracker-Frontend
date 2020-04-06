@@ -47,7 +47,7 @@ export default class SignUp extends Component {
 
         console.log(user);
 
-        const url = "http://localhost:3001/users";
+        const url = "https://collection-tracker-api.herokuapp.com/users";
         fetch(url, {
             method: "POST",
             headers: {

@@ -76,7 +76,7 @@ export default class CreateItem extends Component{
         }
 
         
-        const url = "http://localhost:3001/" + user_id + "/collections/" + col_id + "/items";
+        const url = "https://collection-tracker-api.herokuapp.com/" + user_id + "/collections/" + col_id + "/items";
         console.log("url: " + url);
         fetch(url, {
             method: "POST",
