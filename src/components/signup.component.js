@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import NavbarClass from "./navbar.components.js";
 
 export default class SignUp extends Component {
 
@@ -66,6 +66,12 @@ export default class SignUp extends Component {
 
     render(){
         return (
+            <>
+            <div style={{marginTop: "-2%"}}>
+            <NavbarClass />
+                
+            </div>
+                    
             <div style={{color:"white", backgroundColor: "#333940" ,margin:"2% 40% 5% 5%", padding: "3%"}}>
                 <h3 style={{marginTop: "3%"}}> Sign Up </h3>
                 <br/>
@@ -96,6 +102,7 @@ export default class SignUp extends Component {
 
                 </form>
             </div>
+            </>
         );
     }
 

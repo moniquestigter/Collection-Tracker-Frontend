@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {withAuth} from "@okta/okta-react";
+import NavbarClass from "./navbar.components.js";
 
 export default class ListCollections extends Component{
 
@@ -63,6 +64,7 @@ export default class ListCollections extends Component{
         return this.state.collections.map(e => {
             //console.log(e.id);
             return (
+                
                     <div className="card bg-light mb-3" style={{ width: '19rem' }} key={e.id}>
                         <div className="card-body" >
                             <h5 className="card-title">{e.name}</h5>
@@ -86,8 +88,10 @@ export default class ListCollections extends Component{
         var pathArray = window.location.pathname.split('/');
         var user_id = pathArray[1];
         return (
-            
+            <div style={{margin: "-2% -1% 0 -7%"}}>
+                <NavbarClass />
             <div className="container">
+                
                 <div style= {{display: "inline"}}>
                     <h3 style={{margin: "20px 0 0 -5px"}}>My Collections</h3>
                     <Link className="btn btn-secondary" style={{float: "right", marginTop: "-20px", marginRight: "50px"}} to={{
@@ -99,6 +103,7 @@ export default class ListCollections extends Component{
                 <div className="card-columns" style={{display: "inline-block"}}>
                    {this.displayCollections()}
                 </div>
+            </div>
             </div>
         );
     }

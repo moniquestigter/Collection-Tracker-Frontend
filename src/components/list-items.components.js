@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import NavbarClass from "./navbar.components.js";
 
 export default class ListItems extends Component{
     constructor(props){
@@ -97,7 +98,11 @@ export default class ListItems extends Component{
         var col_id = pathArray[2];
         var user_id = pathArray[1];
         return (
-            
+            <>
+            <div style={{marginTop: "-2%", marginLeft: "-7%"}}>
+            <NavbarClass />
+                
+            </div>
             <div className="container">
                 <div style={{display: "inline", position: "relative"}}>
                     <a href={"/" + user_id} className="previous round"  style={{width: "3%"}}>&laquo; Back</a>
@@ -112,6 +117,7 @@ export default class ListItems extends Component{
                    {this.displayItems()}
                 </div>
             </div>
+            </>
         );
     }
 

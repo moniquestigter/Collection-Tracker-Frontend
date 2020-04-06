@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import NavbarClass from "./navbar.components.js";
 
 export default class CreateItem extends Component{
     constructor(props){
@@ -100,6 +101,11 @@ export default class CreateItem extends Component{
         var col_id = pathArray[2];
         var user_id = pathArray[1];
         return (
+            <>
+             <div style={{marginTop: "-2%", marginLeft: "-7%"}}>
+            <NavbarClass />
+                
+            </div>
             <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
                 <a href={`/${user_id}/${col_id}/items`} className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Add Item</h3>
@@ -153,6 +159,7 @@ export default class CreateItem extends Component{
 
                 </form>
             </div>
+            </>
         );
     }
 }

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Route} from "react-router-dom";
-
-
+import NavbarClass from "./navbar.components.js";
 export default class Login extends Component {
 
 
@@ -16,7 +15,9 @@ export default class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            current_user_id: 0
+            current_user_id: 0,
+            current_user_name: "",
+            logged_in: false
         }
 
     }
@@ -36,15 +37,14 @@ export default class Login extends Component {
 
     onSubmit(e){
         e.preventDefault();
-
+        
+        const {history} = this.props;
 
         const user = {
             username: this.state.username,
             password: this.state.password
         }
 
-
-        //console.log(user);
 
         const url = "http://localhost:3001/users";
         fetch(url)
@@ -57,19 +57,19 @@ export default class Login extends Component {
             //console.log("curr user id: " , curr_user);  
             curr_user.forEach(el => {
                 if(el.username === this.state.username && el.password === this.state.password){
-                    this.setState({current_user_id: el.id});
-                    window.location="/" + el.id;
+                    this.setState({current_user_id: el.id, current_user_name: el.username, logged_in: true});
+                    history.push("/"+ el.id);
+                    //window.location="/" + el.id;
                 }
             });
-            //this.setState({current_user_id: curr_user[0].id});
-            //window.location="/" + this.current_user_id + "/";
         })
 
     }
 
     render(){
         return (
-            <div >
+            <div style={{marginTop: "-2%"}}>
+                <NavbarClass username={this.state.current_user_name}/>
                 <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 40% 5% 5%", padding: "2%"}}>
                 <h3 style={{marginTop: "3%"}}> Login </h3>
                 <br/>

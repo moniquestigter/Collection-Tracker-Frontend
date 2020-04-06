@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-
+import NavbarClass from "./navbar.components.js";
 
 export default class CreateCollection extends Component {
 
@@ -80,6 +80,11 @@ export default class CreateCollection extends Component {
         var pathArray = window.location.pathname.split('/');
         var user_id = pathArray[1];
         return (
+            <>
+            <div style={{marginTop: "-2%", marginLeft: "-7%"}}>
+            <NavbarClass />
+                
+            </div>
             <div style={{color:"white", backgroundColor: "#333940" , margin:"2% 10% 5% 5%", padding: "3%"}}>
                 <a href={"/" + user_id} className="previous round" >&laquo; Back</a>
                 <h3 style={{marginTop: "3%"}}> Create Collection</h3>
@@ -112,6 +117,7 @@ export default class CreateCollection extends Component {
 
                 </form>
             </div>
+            </>
         );
     }
 
